@@ -22,6 +22,6 @@ public class Product
 
     [Required]
     public double Volume_cm3 { get; set; }
-    public string Zone;
+    public string Zone { get; set; }
     public string? state { get; set; }
 }
