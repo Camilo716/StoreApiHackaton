@@ -6,6 +6,11 @@ namespace Test.Helpers;
 
 public static class DbUtilities
 {
+    public static async Task<int> GetProductRecordCount(ApplicationDbContext db)
+    {
+        return await db.Products.CountAsync();
+    }
+
     public static void ReinitializeDbForTests(ApplicationDbContext db)
     {
         // throw new Exception(db.ContextId.ToString());

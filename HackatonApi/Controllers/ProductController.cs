@@ -1,4 +1,5 @@
 using AutoMapper;
+using HackatonApi.DTOs;
 using HackatonApi.Models;
 using HackatonApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -23,5 +24,29 @@ public class ProductController : ControllerBase
     {
         List<Product> products = await _productService.GetAllProductsAsync();
         return Ok(products);
+    }
+
+
+    [HttpGet("{uip}", Name = "GetProductByIUP")]
+    public async Task<ActionResult<Product>> GetByIdAsync([FromRoute] string uip)
+    {
+        try
+        {
+            var product = await _productService.GetProductByUIPAsync(uip);
+            return product;
+        }
+        catch (KeyNotFoundException keyNotFoundEx)
+        {
+            return NotFound(keyNotFoundEx.Message);
+        }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Product>> PostAsync([FromBody] ProductCreationDTO productCreationDTO)
+    {
+        Product product = _mapper.Map<Product>(productCreationDTO);
+        Product productPosted = await _productService.PostProductAsync(product);
+
+        return CreatedAtRoute("GetProductById", new { id = productPosted.Id }, productPosted);
     }
 }
