@@ -9,12 +9,25 @@ public partial class ControllerTests : IClassFixture<WebApplicationFactory<Progr
 {
     private readonly WebApplicationFactory<Program> _factory;
     private readonly ApplicationDbContext _context;
-    private readonly SeedDataIds _seedDataIds;
 
     public ControllerTests(WebApplicationFactory<Program> factory)
     {
         _factory = factory;
         _context = DbContextUtilities.GetDbContext(_factory);
-        _seedDataIds = DbUtilities.ReinitializeDbForTests(_context);
+        DbUtilities.ReinitializeDbForTests(_context);
     }
+
+    [Theory]
+    [InlineData("/api/product")]
+    public async Task Get_AllRecordsReturnSuccess(string url)
+    {
+        HttpClient client = _factory.CreateClient();
+
+        HttpResponseMessage response = await client.GetAsync(url);
+
+        response.EnsureSuccessStatusCode(); // Status Code 200-299
+        Assert.Equal("application/json; charset=utf-8",
+            response.Content.Headers.ContentType?.ToString());
+    }
+
 }

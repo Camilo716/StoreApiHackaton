@@ -1,36 +1,42 @@
 using HackatonApi.Data.EntityFramework;
+using HackatonApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Test.Helpers;
 
 public static class DbUtilities
 {
-    public static SeedDataIds ReinitializeDbForTests(ApplicationDbContext db)
+    public static void ReinitializeDbForTests(ApplicationDbContext db)
     {
         // throw new Exception(db.ContextId.ToString());
-        // db.Genres.RemoveRange(db.Genres);
-        // db.Actors.RemoveRange(db.Actors);
-        SeedDataIds seedData =  InitializeDbForTests(db);
-        return seedData;
+        db.Products.RemoveRange(db.Products);
+        InitializeDbForTests(db);
     }
 
-    private static SeedDataIds InitializeDbForTests(ApplicationDbContext db)
+    private static void InitializeDbForTests(ApplicationDbContext db)
     {
-        // var seedGenres = GetSeedingGenres();
-        // var seedActors = GetSeedingActors();        
 
-        // db.Genres.AddRange(seedGenres);
-        // db.Actors.AddRange(seedActors);
+        db.Products.AddRange(GetSeedingGenres());
         db.SaveChanges();
+    }
 
-        // List<int> seedGenresIds = seedGenres.Select(genre => genre.Id).ToList();
-        // List<int> seedActorsIds = seedActors.Select(actor => actor.Id).ToList();
-
-        SeedDataIds seedData = new SeedDataIds();
-        return seedData;
+    private static List<Product> GetSeedingGenres()
+    {
+        return new List<Product>()
+        {
+            new Product(){IUP_code="1", Name="Silla", Description=".", Volume_cm3=10},
+            new Product(){IUP_code="2", Name="Mesa" , Description=".", Volume_cm3=20},
+            new Product(){IUP_code="3", Name="Parlante", Description=".", Volume_cm3=30}
+        };
     }
 }
 
 public class SeedDataIds
 {
+    public List<int> ProductsIds { get; set; }
+
+    public SeedDataIds(List<int> products)
+    {
+        ProductsIds = products;
+    }
 }

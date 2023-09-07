@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 using HackatonApi.Data.EntityFramework;
+using HackatonApi.Data.Repositories;
+using HackatonApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HackatonApi;
@@ -20,11 +22,14 @@ public class Startup
         services.AddControllers()
                 .AddJsonOptions(
                     x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-        
+
         services.AddDbContext<ApplicationDbContext>(
-            options => 
-                options.UseSqlServer(_config.GetConnectionString("dockerConnection"))
+            options =>
+                options.UseSqlServer(_config.GetConnectionString("defaultConnection"))
             );
+
+        services.AddScoped<IProductRepository, EfProductRepository>();
+        services.AddScoped<ProductService>();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
