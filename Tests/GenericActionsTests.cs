@@ -29,5 +29,4 @@ public partial class ControllerTests : IClassFixture<WebApplicationFactory<Progr
         Assert.Equal("application/json; charset=utf-8",
             response.Content.Headers.ContentType?.ToString());
     }
-
 }

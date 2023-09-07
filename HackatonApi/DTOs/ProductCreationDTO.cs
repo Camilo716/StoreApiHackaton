@@ -16,5 +16,5 @@ public class ProductCreationDTO
 
     [Required]
     public double Volume_cm3 { get; set; }
-    public string? Zone;
+    public string Zone;
 }

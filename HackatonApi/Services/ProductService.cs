@@ -1,4 +1,5 @@
 using HackatonApi.Data.Repositories;
+using HackatonApi.DTOs;
 using HackatonApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,4 +36,21 @@ public class ProductService
         return product;
 
     }
+
+    // internal async Task<Product> UnstoreProduct(string iup, Product product)
+    // {
+    //     product.DeliveryDate = DateTime.Now;
+    //     product.state = "No almacenado";
+    //     return await _productRepository.UpdateAsync(iup, product);
+    // }
+
+    // internal async Task<List<Product>> GetProductsByZoneAsync(string zoneKey)
+    // {
+    //     List<Product> products = await _productRepository.GetByZoneAsync(zoneKey);
+
+    //     if (products == null)
+    //         throw new KeyNotFoundException($"Actor with id {zoneKey} not found");
+
+    //     return products;
+    // }
 }

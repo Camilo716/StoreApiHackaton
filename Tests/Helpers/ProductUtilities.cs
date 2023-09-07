@@ -2,6 +2,7 @@
 
 using System.Text;
 using HackatonApi.DTOs;
+using HackatonApi.Models;
 using Newtonsoft.Json;
 
 internal static class ProductUtilities
@@ -20,5 +21,12 @@ internal static class ProductUtilities
         var jsonContent = JsonConvert.SerializeObject(product);
         HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
         return httpContent;
+    }
+
+    internal static async Task<List<Product>> GetProductModelsFromHttpResponse(HttpResponseMessage response)
+    {
+        string responseBody = await response.Content.ReadAsStringAsync();
+        List<Product> genreModel = JsonConvert.DeserializeObject<List<Product>>(responseBody);
+        return genreModel;
     }
 }

@@ -29,9 +29,9 @@ public static class DbUtilities
     {
         return new List<Product>()
         {
-            new Product(){IUP_code="1", Name="Silla", Description=".", Volume_cm3=10},
-            new Product(){IUP_code="2", Name="Mesa" , Description=".", Volume_cm3=20},
-            new Product(){IUP_code="3", Name="Parlante", Description=".", Volume_cm3=30}
+            new Product(){IUP_code="1", Name="Silla", Description=".", Volume_cm3=10, Zone="A"},
+            new Product(){IUP_code="2", Name="Mesa" , Description=".", Volume_cm3=20, Zone="A"},
+            new Product(){IUP_code="3", Name="Parlante", Description=".", Volume_cm3=30, Zone="B"}
         };
     }
 }

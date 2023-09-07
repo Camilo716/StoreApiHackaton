@@ -47,7 +47,30 @@ public class ProductController : ControllerBase
         Product product = _mapper.Map<Product>(productCreationDTO);
         Product productPosted = await _productService.PostProductAsync(product);
 
-        // return CreatedAtRoute("GetProductByIUP", new { IUP_code = productPosted.IUP_code }, productPosted);
         return Ok(productPosted);
     }
+
+    // [HttpGet("zone/{zoneKey}")]
+    // public async Task<ActionResult<List<Product>>> GetByZoneAsync([FromRoute] String zoneKey)
+    // {
+    //     try
+    //     {
+    //         List<Product> products = await _productService.GetProductsByZoneAsync(zoneKey);
+    //         return products;
+    //     }
+    //     catch (KeyNotFoundException keyNotFoundEx)
+    //     {
+    //         return NotFound(keyNotFoundEx.Message);
+    //     }
+    // }
+
+    // [HttpPut("{iup}")]
+    // public async Task<ActionResult<Product>> UnstoreProductAsync(
+    //     [FromRoute] string iup, [FromBody] ProductCreationDTO productCreationDTO)
+    // {
+    //     Product product = _mapper.Map<Product>(productCreationDTO);
+    //     Product productUnstored = await _productService.UnstoreProduct(iup, product);
+
+    //     return Ok(productUnstored);
+    // }
 }
