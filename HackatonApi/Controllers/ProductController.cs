@@ -47,6 +47,7 @@ public class ProductController : ControllerBase
         Product product = _mapper.Map<Product>(productCreationDTO);
         Product productPosted = await _productService.PostProductAsync(product);
 
-        return CreatedAtRoute("GetProductById", new { id = productPosted.Id }, productPosted);
+        // return CreatedAtRoute("GetProductByIUP", new { IUP_code = productPosted.IUP_code }, productPosted);
+        return Ok(productPosted);
     }
 }
