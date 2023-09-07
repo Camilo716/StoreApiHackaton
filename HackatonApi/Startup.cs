@@ -31,6 +31,16 @@ public class Startup
         services.AddScoped<IProductRepository, EfProductRepository>();
         services.AddScoped<ProductService>();
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAnyOrigin", builder =>
+            {
+                builder
+                    .AllowAnyOrigin() // Permite cualquier origen
+                    .AllowAnyHeader() // Permite cualquier encabezado en las solicitudes
+                    .AllowAnyMethod(); // Permite cualquier método HTTP (GET, POST, etc.)
+            });
+        });
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
     }
@@ -44,6 +54,8 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
+
+        app.UseCors("AllowAnyOrigin");
 
         app.UseRouting();
 
