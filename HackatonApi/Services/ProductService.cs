@@ -37,12 +37,19 @@ public class ProductService
 
     }
 
-    // internal async Task<Product> UnstoreProduct(string iup, Product product)
-    // {
-    //     product.DeliveryDate = DateTime.Now;
-    //     product.state = "No almacenado";
-    //     return await _productRepository.UpdateAsync(iup, product);
-    // }
+    public async Task<Product> UnstoreProduct(int id, Product product)
+    {
+        product.DeliveryDate = DateTime.Now;
+        product.state = "No almacenado";
+        return await _productRepository.UpdateAsync(id, product);
+    }
+
+    public async Task<Product> StoreProduct(int id, Product product)
+    {
+        product.EntryDate = DateTime.Now;
+        product.state = "Almacenado";
+        return await _productRepository.UpdateAsync(id, product);
+    }
 
     // internal async Task<List<Product>> GetProductsByZoneAsync(string zoneKey)
     // {

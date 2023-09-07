@@ -9,5 +9,5 @@ public interface IProductRepository
     Task<ActionResult<Product>> GetByUIPAsync(string uip);
     // Task<List<Product>> GetByZoneAsync(string zonekey);
     Task<Product> SaveAsync(Product product);
-    // Task<Product> UpdateAsync(string iup, Product product);
+    Task<Product> UpdateAsync(int id, Product product);
 }

@@ -44,11 +44,11 @@ public class EfProductRepository : IProductRepository
         return productEntry.Entity;
     }
 
-    // public async Task<Product> UpdateAsync(string iup, Product product)
-    // {
-    //     product.IUP_code = iup;
-    //     _context.Entry(product).State = EntityState.Modified;
-    //     await _context.SaveChangesAsync();
-    //     return product;
-    // }
+    public async Task<Product> UpdateAsync(int id, Product product)
+    {
+        product.Id = id;
+        _context.Entry(product).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return product;
+    }
 }

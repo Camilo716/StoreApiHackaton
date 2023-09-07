@@ -64,13 +64,21 @@ public class ProductController : ControllerBase
     //     }
     // }
 
-    // [HttpPut("{iup}")]
-    // public async Task<ActionResult<Product>> UnstoreProductAsync(
-    //     [FromRoute] string iup, [FromBody] ProductCreationDTO productCreationDTO)
-    // {
-    //     Product product = _mapper.Map<Product>(productCreationDTO);
-    //     Product productUnstored = await _productService.UnstoreProduct(iup, product);
+    [HttpPut("unstore/{id:int}")]
+    public async Task<ActionResult<Product>> UnstoreProductAsync(
+        [FromRoute] int id, [FromBody] ProductCreationDTO productCreationDTO)
+    {
+        Product product = _mapper.Map<Product>(productCreationDTO);
+        Product productUnstored = await _productService.UnstoreProduct(id, product);
+        return Ok(productUnstored);
+    }
 
-    //     return Ok(productUnstored);
-    // }
+    [HttpPut("store/{id:int}")]
+    public async Task<ActionResult<Product>> StoreProductAsync(
+        [FromRoute] int id, [FromBody] ProductCreationDTO productCreationDTO)
+    {
+        Product product = _mapper.Map<Product>(productCreationDTO);
+        Product productUnstored = await _productService.StoreProduct(id, product);
+        return Ok(productUnstored);
+    }
 }
