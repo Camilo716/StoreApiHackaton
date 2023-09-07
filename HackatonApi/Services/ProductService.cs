@@ -20,6 +20,8 @@ public class ProductService
 
     public async Task<Product> PostProductAsync(Product product)
     {
+        product.EntryDate = DateTime.Now;
+        product.state = "Almacenado";
         return await _productRepository.SaveAsync(product);
     }
 

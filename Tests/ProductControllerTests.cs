@@ -17,6 +17,10 @@ public partial class ControllerTests
         int counterAfter = await DbUtilities.GetProductRecordCount(_context);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(counterBefore + 1, counterAfter);
+
+        var responseBody = await response.Content.ReadAsStringAsync();
+        Assert.Contains("Almacenado", responseBody);
+
     }
 
     [Fact]
